@@ -8,6 +8,8 @@ import SigninSignup from './pages/signin-signup/SigninSignup';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
+import { selectCurrentUser } from './redux/user/user.selectors';
+
 function App(props) {
   const { setCurrentUser } = props;
   useEffect(() => {
@@ -49,7 +51,7 @@ function App(props) {
   );
 }
 const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+  currentUser: selectCurrentUser(state)
 });
 
 const mapDispatchToProps = dispatch => ({
