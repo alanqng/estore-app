@@ -8,8 +8,8 @@ import SigninSignup from './pages/signin-signup/SigninSignup';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions'
-function App() {
-  const {setCurrentUser} = this.props
+function App(props) {
+  const {setCurrentUser} = props
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log(userAuth)
@@ -31,9 +31,6 @@ function App() {
     };
   }, [])
 
-  useEffect(() => {
-    console.log(currentUser)
-  }, [currentUser])
   return (
     <div className="App">
     <Header/>
@@ -46,8 +43,8 @@ function App() {
   );
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
-}
+})
 
 export default connect(null, mapDispatchToProps)(App);
