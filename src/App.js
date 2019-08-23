@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import HomePage from './pages/homepage/homepage.component';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Shop from './pages/shop/Shop';
+import Checkout from './pages/checkout/Checkout'
 import './App.css';
 import Header from './components/header/Header';
 import SigninSignup from './pages/signin-signup/SigninSignup';
@@ -39,6 +40,7 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={Shop} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route
           exact
           path="/signin"
