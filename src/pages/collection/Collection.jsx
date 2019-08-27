@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import CollectionItem from '../../components/collection-item/CollectionItem';
 import { connect } from 'react-redux'
 import { selectCollection } from '../../redux/shop/shop.selectors';
 import './Collection.scss'
 
-const Collection = ({collection}) => {
-
+const CollectionPage = ({collection}) => {
+  
     console.log(collection)
     const { title, items} = collection
     return (
-        <div className='category'>
+        <div className='collection-page'>
             <h2 className={'title'}>{title}</h2>
             <div className={'items'}>
                 {items.map(item => (
@@ -21,7 +21,7 @@ const Collection = ({collection}) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-    collection: selectCollection(ownProps.match.params.collectionId)(state)
+collection: selectCollection(ownProps.match.params.collectionId)(state)
 })
 
-export default connect(mapStateToProps)(Collection)
+export default connect(mapStateToProps)(CollectionPage)
