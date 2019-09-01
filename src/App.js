@@ -6,13 +6,15 @@ import Checkout from './pages/checkout/Checkout'
 import './App.css';
 import Header from './components/header/Header';
 import SigninSignup from './pages/signin-signup/SigninSignup';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, addCollectionsAndDocuments } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
+// import { selectShopCollectionArray } from './redux/shop/shop.selectors'
+import { createStructuredSelector } from 'reselect';
 
-function App(props) {
-  const { setCurrentUser } = props;
+const App = (props) => {
+  const { setCurrentUser, collectionsArray } = props;
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log(userAuth);
@@ -26,6 +28,7 @@ function App(props) {
         });
       }
       setCurrentUser(userAuth);
+      // addCollectionsAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})))
       // setCurrentUser(user)
       // createUserProfileDocument(user)
     });
@@ -52,8 +55,9 @@ function App(props) {
     </div>
   );
 }
-const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state)
+const mapStateToProps = createStructuredSelector ({
+  currentUser: selectCurrentUser,
+  // collectionsArray: selectShopCollectionArray
 });
 
 const mapDispatchToProps = dispatch => ({
