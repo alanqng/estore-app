@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview';
 import { Route } from 'react-router-dom'
 import CollectionPage from '../collection/Collection'
 import WithSpinner from '../../components/with-spinner/WithSpinner'
 import { connect } from 'react-redux'
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions'
+import { fetchCollectionsStartAsync, fetchCollectionsStart } from '../../redux/shop/shop.actions'
 import { createStructuredSelector } from 'reselect'
 import { selectIsCollectionFetching, selectIsCollectionLoaded } from '../../redux/shop/shop.selectors'
 const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
-const Shop =  ({ match, fetchCollectionAsync, isCollectionLoaded }) => {
-
+const Shop =  ({ match, fetchCollectionAsync, fetchCollectionsStart, isCollectionLoaded }) => {
     useEffect(() => {
-        fetchCollectionAsync()
+        // fetchCollectionAsync()
+        fetchCollectionsStart()
         // const collectionRef = firestore.collection('collections')
         
         // collectionRef.get().then(snapshot => {
@@ -37,7 +37,7 @@ const Shop =  ({ match, fetchCollectionAsync, isCollectionLoaded }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchCollectionAsync: () => dispatch(fetchCollectionsStartAsync())
+    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 })
 
 const mapStateToProps = createStructuredSelector({
