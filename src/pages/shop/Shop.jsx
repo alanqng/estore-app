@@ -13,6 +13,7 @@ const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
 const Shop =  ({ match, fetchCollectionAsync, fetchCollectionsStart, isCollectionLoaded }) => {
+    console.log(match)
     useEffect(() => {
         // fetchCollectionAsync()
         fetchCollectionsStart()

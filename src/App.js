@@ -7,6 +7,7 @@ import './App.css';
 import Header from './components/header/Header';
 import SigninSignup from './pages/signin-signup/SigninSignup';
 import { auth, createUserProfileDocument, addCollectionsAndDocuments } from './firebase/firebase.utils';
+import { checkUserSession } from "./redux/user/user.actions";
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
@@ -14,27 +15,10 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 
 const App = (props) => {
-  const { setCurrentUser, collectionsArray } = props;
+  // const { setCurrentUser, collectionsArray } = props;
   useEffect(() => {
-    let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      console.log(userAuth);
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-      // addCollectionsAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})))
-      // setCurrentUser(user)
-      // createUserProfileDocument(user)
-    });
-    return () => {
-      unsubscribeFromAuth();
-    };
+   const { checkUserSession } = props;
+   checkUserSession()
   }, []);
 
   return (
@@ -61,7 +45,8 @@ const mapStateToProps = createStructuredSelector ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  // setCurrentUser: user => dispatch(setCurrentUser(user))
+   checkUserSession: user => dispatch(checkUserSession())
 });
 
 export default connect(
