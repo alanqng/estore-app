@@ -6,4 +6,16 @@
     .title {
         margin: 10px 0;
     }
+
+
+    @media only screen and (max-width: 800px) {
+        width: 300px;
+
+        & form {
+            :last-child {
+                width: 100%;
+            }
+        }
+
+}
 }

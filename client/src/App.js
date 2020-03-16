@@ -3,7 +3,7 @@ import HomePage from './pages/homepage/homepage.component';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Shop from './pages/shop/Shop';
 import Checkout from './pages/checkout/Checkout'
-import './App.css';
+import {GlobalStyle} from "./global.styles";
 import Header from './components/header/Header';
 import SigninSignup from './pages/signin-signup/SigninSignup';
 import { auth, createUserProfileDocument, addCollectionsAndDocuments } from './firebase/firebase.utils';
@@ -22,7 +22,8 @@ const App = (props) => {
   }, []);
 
   return (
-    <div className="App">
+    <div>
+      <GlobalStyle/>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
